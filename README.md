@@ -1,5 +1,7 @@
 # 小艺六色墨水屏相框
 
+**简体中文** · [English](README.en.md)
+
 用一块 ESP32-S3 和一块六色墨水屏做家庭相框。家人连上同一 Wi-Fi，用手机浏览器选照片、裁剪、看六色预览，再投到屏上。网页由相框自己提供，播放列表保存在板载闪存。配好后可以关掉电脑，无需账号、云服务或投图码。
 
 ## 家里怎么用
@@ -54,7 +56,7 @@ arduino-cli upload -p COM5 --fqbn "esp32:esp32:esp32s3:FlashSize=16M,PSRAM=opi,P
 
 ```sh
 python panel.py info --port COM5
-python panel.py configure --port COM5 --ssid "你的 2.4 GHz Wi-Fi 名" --mac "02:00:00:00:00:01"
+python panel.py configure --port COM5 --ssid "Your-2.4GHz-WiFi" --mac "02:00:00:00:00:01"
 python panel.py status
 ```
 
@@ -80,10 +82,10 @@ python ota.py update build/simple_epaper.ino.bin xiaoyi-frame-2
 
 ```sh
 python panel.py prepare-photo photo.jpg --output-dir prepared
-python panel.py push-frame prepared/frame.bin --sha256 <上一步输出的SHA256> --receipt receipt.json
+python panel.py push-frame prepared/frame.bin --sha256 "FRAME_SHA256_FROM_PREPARE_PHOTO" --receipt receipt.json
 ```
 
-先看 `prepared/preview.png`，需要时用 `--center-x`、`--center-y` 调整裁剪中心，再发送对应的帧。坐标范围为 0 到 1。命令行使用桌面六色转换路径，网页的增强模式在浏览器中运行。
+先看 `prepared/preview.png`。调整裁剪时，换一个新的输出目录，用 `--center-x`、`--center-y` 指定裁剪中心，范围为 0 到 1。发送时使用选中版本的 `frame.bin` 路径，并把 `FRAME_SHA256_FROM_PREPARE_PHOTO` 换成生成该版本时输出的 `sha256`。命令行使用桌面六色转换路径，网页的增强模式在浏览器中运行。
 
 ## 验证
 
